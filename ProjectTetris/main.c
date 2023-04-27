@@ -1,3 +1,4 @@
+#include <stdio.h>
 typedef enum {
 	RED = 41,
 	GREEN,
@@ -5,7 +6,7 @@ typedef enum {
 	BLUE,
 	PURPLE,
 	CYAN,
-	WHILE,
+	WHITE,
 	BLACK = 0,
 }Color ;
 
@@ -27,11 +28,9 @@ typedef struct {
 	char rotates[4][4][4];
 }Shape;
 
-Shape shape[7] = {
+Shape shapes[7] = {
 	{
-		.shape = I,
-		.color = CYAN,
-		.size = 4,
+		.shape = I, .color = CYAN, .size = 4,
 		.rotates = {
 			{
 				{0,0,0,0},
@@ -59,22 +58,175 @@ Shape shape[7] = {
 			},
 		}
 	},
+	{
+		.shape = J, .color = GREEN, .size = 3,
+		.rotates = {
+			{
+				{1,0,0},
+				{1,1,1},
+				{0,0,0},
+			},
+			{
+				{0,1,1},
+				{0,1,0},
+				{0,1,0},
+			},
+			{
+				{0,0,0},
+				{1,1,1},
+				{0,0,1},
+			},
+			{
+				{0,1,0},
+				{0,1,0},
+				{1,1,0},
+			},
+		}
+	},
+	{
+		.shape = L, .color = BLUE, .size = 3,
+		.rotates = {
+			{
+				{0,0,1},
+				{1,1,1},
+				{0,0,0},
+			},
+			{
+				{0,1,0},
+				{0,1,0},
+				{0,1,1},
+			},
+			{
+				{0,0,0},
+				{1,1,1},
+				{1,0,0},
+			},
+			{
+				{1,1,0},
+				{0,1,0},
+				{0,1,0},
+			},
+		}
+	},
+	{
+		.shape = O, .color = PURPLE, .size = 2,
+		.rotates = {
+			{
+				{1,1},
+				{1,1},
+			},
+			{
+				{1,1},
+				{1,1},
+			},
+			{
+				{1,1},
+				{1,1},
+			},
+			{
+				{1,1},
+				{1,1},
+			},
+		}
+	},
+	{
+		.shape = S, .color = RED, .size = 3,
+		.rotates = {
+			{
+				{0,1,1},
+				{1,1,0},
+				{0,0,0},
+			},
+			{
+				{0,1,0},
+				{0,1,1},
+				{0,0,1},
+			},
+			{
+				{0,0,0},
+				{0,1,1},
+				{1,1,0},
+			},
+			{
+				{1,0,0},
+				{1,1,0},
+				{0,1,0},
+			},
+		}
+	},
+	{
+		.shape = T, .color = YELLOW, .size = 3,
+		.rotates = {
+			{
+				{0,1,0},
+				{1,1,1},
+				{0,0,0},
+			},
+			{
+				{0,1,0},
+				{0,1,1},
+				{0,1,0},
+			},
+			{
+				{0,0,0},
+				{1,1,1},
+				{0,1,0},
+			},
+			{
+				{0,1,0},
+				{1,1,0},
+				{0,1,0},
+			},
+		}
+	},
+	{
+		.shape = Z, .color = WHITE, .size = 3,
+		.rotates = {
+			{
+				{1,1,0},
+				{0,1,1},
+				{0,0,0},
+			},
+			{
+				{0,0,1},
+				{0,1,1},
+				{0,1,0},
+			},
+			{
+				{0,0,0},
+				{1,1,0},
+				{0,1,1},
+			},
+			{
+				{0,1,0},
+				{1,1,0},
+				{1,0,0},
+			},
+		}
+	},
 	
 };
 
-int main() {
+int main() //just for test
+{
 	Color cur;
-	for (int i = 0; i < 7; i++) {
-		for (int r = 0; r < 4; r++) {
-			for (int s = 0; s < shape[i].size; s++) {
-				for (int t = 0; t < shape[i].size; t++) {
-					if (shape[i].rotates[r][s][t]) {
-						cur = shape[i].color;
+	for (int i = 0; i < 7; i++)
+	{
+		for (int r = 0; r < 4; r++)
+		{
+			for (int s = 0; s < shapes[i].size; s++)
+			{
+				for (int t = 0; t < shapes[i].size; t++)
+				{
+					if (shapes[i].rotates[r][s][t])
+					{
+						cur = shapes[i].color;
 					}
-					else {
-						cur = BLACK;
+					else
+					{
+						cur = WHITE;
 					}
-					printf("\033[%dm ", cur);
+					printf("\033[%dm  \033[0m", cur);
 				}
 				printf("\n");
 			}
@@ -82,6 +234,7 @@ int main() {
 		}
 		printf("\n");
 	}
+	return 0;
 }
 typedef struct {
 	Color color;
